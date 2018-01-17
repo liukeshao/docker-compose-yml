@@ -1,0 +1,8 @@
+caddy:
+  image: abiosoft/caddy:latest
+  ports:
+    - 80:80
+    - 443:443
+  volumes:
+    - $HOME/docker/caddy/Caddyfile:/etc/Caddyfile
+    - $HOME/docker/caddy/.caddy:/root/.caddy  

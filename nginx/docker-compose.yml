@@ -1,0 +1,10 @@
+nginx:
+  image: nginx:latest
+  # 端口 宿主机端口：容器端口
+  ports:
+    - 80:80
+    - 443:443
+  volumes:
+    - $HOME/docker/nginx/conf.d:/etc/nginx/conf.d
+    - $HOME/docker/nginx/html:/usr/share/nginx/html
+    - $HOME/docker/nginx/log:/var/log/nginx

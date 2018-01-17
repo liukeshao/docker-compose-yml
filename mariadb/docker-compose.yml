@@ -1,0 +1,12 @@
+mariadb:
+  image: mariadb:latest
+  ports:
+    - 3306:3306
+  volumes:
+    - $HOME/docker/mariadb:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: lovelive
+
+   
+
+

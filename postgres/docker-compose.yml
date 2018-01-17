@@ -1,0 +1,10 @@
+postgres:
+  image: postgres:latest
+  ports:
+    - 5432:5432
+  volumes:
+    - $HOME/docker/postgres:/data
+  environment:
+    POSTGRES_PASSWORD: lovelive
+
+
