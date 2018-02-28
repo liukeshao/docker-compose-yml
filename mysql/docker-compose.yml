@@ -1,9 +1,0 @@
-mysql:
-  image: mysql:latest
-  ports:
-    - 3306:3306
-  volumes:
-    - $HOME/docker/mysql/data:/var/lib/mysql
-    - $HOME/docker/mysql/conf:/etc/mysql/conf.d
-  environment:
-    MYSQL_ROOT_PASSWORD: lovelive

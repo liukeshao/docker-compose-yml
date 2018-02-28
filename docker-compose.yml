@@ -1,0 +1,55 @@
+caddy:
+  image: abiosoft/caddy:latest
+  ports:
+    - 2015:2015
+    - 2080:80
+    - 2443:443
+  volumes:
+    - $HOME/docker/caddy/Caddyfile:/etc/Caddyfile
+    - $HOME/docker/caddy/.caddy:/root/.caddy 
+
+mariadb:
+  image: mariadb:latest
+  ports:
+    - 4406:3306
+  volumes:
+    - $HOME/docker/mariadb:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: lovelive
+
+mysql:
+  image: mysql:latest
+  ports:
+    - 3306:3306
+  volumes:
+    - $HOME/docker/mysql/data:/var/lib/mysql
+    - $HOME/docker/mysql/conf:/etc/mysql/conf.d
+  environment:
+    MYSQL_ROOT_PASSWORD: lovelive
+
+nginx:
+  image: nginx:latest
+  # 端口 宿主机端口：容器端口
+  ports:
+    - 1080:80
+    - 1443:443
+  volumes:
+    - $HOME/docker/nginx/conf.d:/etc/nginx/conf.d
+    - $HOME/docker/nginx/html:/usr/share/nginx/html
+    - $HOME/docker/nginx/log:/var/log/nginx
+
+postgres:
+  image: postgres:latest
+  ports:
+    - 5432:5432
+  volumes:
+    - $HOME/docker/postgres:/data
+  environment:
+    POSTGRES_PASSWORD: lovelive
+
+redis:
+  image: redis:latest
+  ports:
+    - 6379:6379
+  volumes:
+    - $HOME/docker/redis:/data 
