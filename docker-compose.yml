@@ -1,55 +1,73 @@
-caddy:
-  image: abiosoft/caddy:latest
-  ports:
-    - 2015:2015
-    - 2080:80
-    - 2443:443
-  volumes:
-    - $HOME/docker/caddy/Caddyfile:/etc/Caddyfile
-    - $HOME/docker/caddy/.caddy:/root/.caddy 
+version: '0.0.1'
+services:
+  caddy:
+    image: abiosoft/caddy:latest
+    container_name: caddy
+    ports:
+      - 2015:2015
+      - 2080:80
+      - 2443:443
+    volumes:
+      - $HOME/docker/caddy/Caddyfile:/etc/Caddyfile
+      - $HOME/docker/caddy/.caddy:/root/.caddy
 
-mariadb:
-  image: mariadb:latest
-  ports:
-    - 4406:3306
-  volumes:
-    - $HOME/docker/mariadb:/var/lib/mysql
-  environment:
-    MYSQL_ROOT_PASSWORD: lovelive
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.2
+    container_name: elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
+    volumes:
+      - $HOME/docker/elasticsearch/data:/usr/share/elasticsearch/data  
+    environment:
+      discovery.type: single-node  
 
-mysql:
-  image: mysql:latest
-  ports:
-    - 3306:3306
-  volumes:
-    - $HOME/docker/mysql/data:/var/lib/mysql
-    - $HOME/docker/mysql/conf:/etc/mysql/conf.d
-  environment:
-    MYSQL_ROOT_PASSWORD: lovelive
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    ports:
+      - 4406:3306
+    volumes:
+      - $HOME/docker/mariadb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: lovelive
 
-nginx:
-  image: nginx:latest
-  # 端口 宿主机端口：容器端口
-  ports:
-    - 1080:80
-    - 1443:443
-  volumes:
-    - $HOME/docker/nginx/conf.d:/etc/nginx/conf.d
-    - $HOME/docker/nginx/html:/usr/share/nginx/html
-    - $HOME/docker/nginx/log:/var/log/nginx
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - $HOME/docker/mysql/data:/var/lib/mysql
+      - $HOME/docker/mysql/conf:/etc/mysql/conf.d
+    environment:
+      MYSQL_ROOT_PASSWORD: lovelive
 
-postgres:
-  image: postgres:latest
-  ports:
-    - 5432:5432
-  volumes:
-    - $HOME/docker/postgres:/data
-  environment:
-    POSTGRES_PASSWORD: lovelive
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 1080:80
+      - 1443:443
+    volumes:
+      - $HOME/docker/nginx/conf.d:/etc/nginx/conf.d
+      - $HOME/docker/nginx/html:/usr/share/nginx/html
+      - $HOME/docker/nginx/log:/var/log/nginx
 
-redis:
-  image: redis:latest
-  ports:
-    - 6379:6379
-  volumes:
-    - $HOME/docker/redis:/data 
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - $HOME/docker/postgres:/data
+    environment:
+      POSTGRES_PASSWORD: lovelive
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - $HOME/docker/redis:/data 
