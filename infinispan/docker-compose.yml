@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  infinispan:
+    image: quay.io/infinispan/server
+    container_name: infinispan
+    ports:
+      - "11222:11222"
+    environment:
+      USER: admin
+      PASS: password
+

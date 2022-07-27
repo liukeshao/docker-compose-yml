@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  zookeeper:
+    image: zookeeper:latest
+    container_name: zookeeper
+    ports:
+      - 2181:2181
+    volumes:
+      - data:/data
+      - datalog:/datalog
+    environment:
+      ZOO_MY_ID: 1
+
+volumes:
+  data:
+    driver: local
+  datalog:
+    driver: local  

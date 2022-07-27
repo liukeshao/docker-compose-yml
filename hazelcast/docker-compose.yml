@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  hazelcast:
+    image: hazelcast/hazelcast
+    container_name: hazelcast
+    ports:
+      - "5701:5701"
+    environment:
+      - HZ_CLUSTERNAME=dev
+      - "JAVA_OPTS=-Xms512M -Xmx1024M"
+    networks:
+      - hazelcast-network
+  hazelcast-management-center:
+    image: hazelcast/management-center
+    container_name: hazelcast-management-center
+    ports:
+      - "5657:8080"
+    networks:
+      - hazelcast-network
+
+networks:
+  hazelcast-network:
