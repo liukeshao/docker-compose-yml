@@ -1,0 +1,10 @@
+zeebe:
+  broker:
+    exporters:
+      kafka:
+        className: io.zeebe.exporters.kafka.KafkaExporter
+        jarPath: /usr/local/zeebe/lib/zeebe-kafka-exporter.jar
+        args:
+          producer:
+            # update this to point to your Kafka brokers
+            servers: "kafka:9092"

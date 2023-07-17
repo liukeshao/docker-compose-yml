@@ -1,0 +1,16 @@
+version: "3"
+services:
+  zeebe:
+    image: camunda/zeebe:8.0.5
+    container_name: zeebe
+    hostname: zeebe
+    depends_on:
+      - zeebe-kafka
+    ports:
+      - "26500:26500"
+    environment:
+      SPRING_CONFIG_ADDITIONAL_LOCATION: /usr/local/zeebe/config/exporter.yml
+      ZEEBE_BROKER_EXPORTERS_KAFKA_ARGS_PRODUCER_SERVERS: "host.docker.internal:9092"
+    volumes:
+      - ./exporter.yml:/usr/local/zeebe/config/exporter.yml
+      - ./zeebe-kafka-exporter-jar-with-dependencies.jar:/usr/local/zeebe/lib/zeebe-kafka-exporter.jar
